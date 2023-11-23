@@ -1,11 +1,12 @@
-import { Box } from '@mui/material';
+import { Stack } from '@mui/material';
 import React from 'react';
+import Work from '../../components/Work/Work';
 
 const Home = () => {
     return (
-        <Box>
-            home
-        </Box>
+        <Stack>
+            <Work/>
+        </Stack>
     );
 };
 

@@ -1,16 +1,18 @@
+import { Box } from '@mui/material';
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Footer from '../components/Shared/Footer/Footer';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/Shared/Header/Header';
 
 const Layout = () => {
+    const location = useLocation();
+    const noHeader = location.pathname.includes('/signup') || location.pathname.includes('/login') ;
     return (
-        <div>
-            <Header/>
-            <Outlet/>
-            <Footer/>
+        <Box maxWidth='xl'>
             
-        </div>
+            {noHeader ||   <Header/>  }
+            <Outlet/>
+            
+        </Box>
     );
 };
 
