@@ -1,5 +1,4 @@
 import { Box, Button, TextField, styled } from "@mui/material";
-import React, { forwardRef } from "react";
 export const RegisterForm = styled(Box)(({ theme }) => ({
   width: "100%",
   maxWidth: 480,
@@ -60,8 +59,6 @@ export const CustomTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const RegisterTextField = (props, ref) => {
-  return <CustomTextField id="outlined-basic" {...props} inputRef={ref} />;
-};
 
-export default forwardRef(RegisterTextField);
+
+

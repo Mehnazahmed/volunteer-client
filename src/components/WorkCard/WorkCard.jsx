@@ -7,7 +7,7 @@ import React from "react";
 
 const WorkCard = ({workData}) => {
     
-    console.log(workData)
+    
   return (
     <Card sx={{ maxWidth: 190 ,height:'100%'}}>
       <CardActionArea>

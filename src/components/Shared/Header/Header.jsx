@@ -2,24 +2,25 @@ import AdbIcon from "@mui/icons-material/Adb";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import AppBar from "@mui/material/AppBar";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
-import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import group from "../../../assets/logos/Group 1329.png";
 import volunteer from "../../../assets/logos/volunteering.jpeg";
+import { useAuth } from "../../../hooks/useAuth";
 import "../Header/Header.css";
 import { Button, ButtonAdmin } from "./Header.styled";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Header = () => {
+  const { user, logOutUser,admin } = useAuth();
+  console.log(user);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -37,6 +38,9 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleLogOut = () => {
+    logOutUser();
+  };
 
   const pages = (
     <>
@@ -52,47 +56,59 @@ const Header = () => {
       <li>
         <Link to="/blog">Blog</Link>
       </li>
-      <Button>
-        <Link class="Btn" to="/signup">
-          Register
+      {!user && (
+        <Link to="/signup">
+          <Button className="Btn">Register</Button>
         </Link>
-      </Button>
-      <ButtonAdmin>
+      )}
+      
+      {user && admin &&
+        <ButtonAdmin>
         <Link class="Btn" to="/blog">
           Admin
         </Link>
-      </ButtonAdmin>
+      </ButtonAdmin>}
+
+      {user && (
+        <>
+          <Button onClick={handleLogOut} className="Btn">
+            Logout
+          </Button>
+         <li>
+         <Typography  sx={{ color: "#191919" }}>
+            {user.displayName}
+          </Typography>
+         </li>
+        </>
+      )}
+
     </>
   );
   return (
-    <div style={{ position: "relative" }} >
+    <div style={{ position: "relative" }}>
       <div
-       style={{
-        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6)), url(${volunteer})`,
-        backgroundSize: "cover",
-        height: "50vh",
-        
-        width: "100%",
-        
-        backgroundColor: "rgba(255, 255, 255, 0.2)"
-       
-       
-      }}
-        
+        style={{
+          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6)), url(${volunteer})`,
+          backgroundSize: "cover",
+          height: "50vh",
+
+          width: "100%",
+
+          backgroundColor: "rgba(255, 255, 255, 0.2)",
+        }}
       >
         <AppBar
-       sx={{
-        position: "relative",
-        boxShadow:"none",
-        
-        backgroundColor: "rgba(255, 255, 255, 0)", // Adjust the RGBA values and opacity as needed
-      }}
-        
+          sx={{
+            position: "relative",
+            boxShadow: "none",
+
+            backgroundColor: "rgba(255, 255, 255, 0)", // Adjust the RGBA values and opacity as needed
+          }}
           position="static"
         >
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-              <Typography
+              {/* <Typography
                 variant="h6"
                 noWrap
                 component="a"
@@ -103,13 +119,12 @@ const Header = () => {
                   fontFamily: "monospace",
                   fontWeight: 700,
                   letterSpacing: ".3rem",
-                  
+
                   textDecoration: "none",
-                  flexGrow: 4,
+                  flexGrow: 6,
                 }}
-              >
-                
-              </Typography>
+              >Volunteer NET..</Typography> */}
+              <Box sx={{flexGrow: 6}}><img src={group} style={{width:'180px', marginTop:'1rem' }} /></Box>
 
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                 <IconButton
@@ -175,7 +190,7 @@ const Header = () => {
                 {pages}
               </Box>
 
-              <Box sx={{ flexGrow: 0 }}>
+              {/* <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
@@ -206,7 +221,7 @@ const Header = () => {
                     </MenuItem>
                   ))}
                 </Menu>
-              </Box>
+              </Box> */}
             </Toolbar>
           </Container>
         </AppBar>
