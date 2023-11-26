@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -68,10 +69,18 @@ const useFirebase = () => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        axios.post('http://localhost:5000/jwt',{email:user.email})
+        .then(data =>{
+          console.log(data.data);
+          //set acess token
+          localStorage.setItem('access-token',data.data.token);
+          setUserLoading(false);
+        })
       } else {
         setUser(null);
+        localStorage.removeItem('access-token')
       }
-      setUserLoading(false);
+      
     });
     return () => unSubscribe;
   }, [auth]);
