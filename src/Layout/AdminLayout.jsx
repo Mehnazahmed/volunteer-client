@@ -1,69 +1,109 @@
-import MailIcon from "@mui/icons-material/Mail";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import AppBar from "@mui/material/AppBar";
+import * as React from "react";
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
 import Drawer from "@mui/material/Drawer";
+import CssBaseline from "@mui/material/CssBaseline";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import { Outlet,Link } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import * as React from "react";
-import "./AdminLayOut.css";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
+import group from "../assets/logos/Group 1329.png";
+import Stack from '@mui/material/Stack';
+import {PeopleAltOutlined,AddOutlined} from "@mui/icons-material"
+
+
+
 const drawerWidth = 240;
 
-const AdminLayout = () => {
+const adminLayout = () => {
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
+     
       <AppBar
-        position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      position="fixed"
+      sx={{
+        height:'70px',
+        backgroundColor: '#FFFFFF',
+        boxShadow:'none'
+      }}
+       
       >
-        <Toolbar className="toolbar">
-          <Typography variant="h6" noWrap component="div">
-            drawer
-          </Typography>
+       <Stack direction='row' spacing={3}>
+       <img
+          style={{ width: "180px",padding:'5px'}}
+          src={group}
+          alt=""
+          srcset=""
+        />
+        
+        
+        <Toolbar>
+            
+      
+       <Typography fontWeight='bold' color='#111111'>Volunteer Register List</Typography>
+       
         </Toolbar>
+       </Stack>
       </AppBar>
       <Drawer
-        variant="permanent"
         sx={{
-          width: drawerWidth,
+          width:'170px', 
           flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
+          padding: 0,
+          "& .MuiDrawer-paper": {
+            width: "190px",
             boxSizing: "border-box",
+            zIndex:'0'
           },
         }}
+        variant="permanent"
       >
-        <Toolbar />
-        <Box sx={{ overflow: "auto" }}>
-          <List>
-            {["Inbox", "Starred"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
+      
+        
+        
+        <List sx={{marginTop:'70px'}}>
+          <ListItem button variant={Link}>
+            
+              
+              < PeopleAltOutlined sx={{marginRight:'1rem'}}/>
+            
+            <ListItemText primary="Volunteer List" />
+          </ListItem>
+          <ListItem button variant={Link}>
+           
+              <AddOutlined sx={{marginRight:'1rem'}} />
+            
+            
+            <ListItemText primary="Add Event" />
+          </ListItem>
+          {/* Add more ListItem components for additional links */}
+        </List>
       </Drawer>
       <Box
+      
+     
+      marginTop='70px'
+      bgcolor='#E5E5E5'
         component="main"
-        sx={{ flexGrow: 1, p: 3, backgroundColor: "#E5E5E5" }}
+        sx={{
+           height:'100vh' ,
+          flexGrow: 1,
+          p: 3,
+        }}
       >
-        <Toolbar />
+       <Box >
+        hello
+        <Outlet/>
+       </Box>
       </Box>
     </Box>
   );
 };
 
-export default AdminLayout;
+export default adminLayout;

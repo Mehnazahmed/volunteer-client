@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminLayout from "../../Layout/AdminLayout";
 import Layout from "../../Layout/Layout";
-import AdminLayout from "../../Layout/adminLayout";
 import AddEvent from "../../pages/AddEvent/AddEvent";
 import AllUsers from "../../pages/AllUsers/AllUsers";
 import Events from "../../pages/Events/Events";
@@ -28,19 +28,19 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path:'/admin',
+    path:'admin',
     element:<AdminLayout/>,
     children:[
       {
-        path:'admin/users',
+        path:'users',
         element:<AllUsers/>
       },
       {
-        path:'admin/addevent',
+        path:'addevent',
         element:<AddEvent/>
       },
       {
-        path:'admin/events',
+        path:'events',
         element:<Events/>
       },
 

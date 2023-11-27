@@ -15,7 +15,6 @@ import { useAuth } from "../../../hooks/useAuth";
 import "../Header/Header.css";
 import { Button, ButtonAdmin } from "./Header.styled";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Header = () => {
   const { user, logOutUser,admin } = useAuth();
@@ -55,6 +54,7 @@ const Header = () => {
       <li>
         <Link to="/blog">Blog</Link>
       </li>
+      
       {!user && (
         <Link to="/signup">
           <Button className="Btn">Register</Button>
