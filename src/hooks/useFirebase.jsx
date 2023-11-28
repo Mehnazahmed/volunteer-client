@@ -4,7 +4,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  updateProfile,
+  updateProfile
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "../firebase.config";
@@ -14,24 +14,30 @@ const useFirebase = () => {
   const [userLoading, setUserLoading] = useState(true);
   const [authError, setAuthError] = useState("");
 
+
+  const updateUser =(name)=>{
+    return  updateProfile(auth.currentUser,{
+     displayName: name
+    })
+ };
+
+
   
   //sign in
-  const registerWithEmailAndPassword = async (name, email, password,navigate) => {
+  const createUser = async ( email, password) => {
     try {
       setUserLoading(true);
       setAuthError("");
 
       await createUserWithEmailAndPassword(auth, email, password);
 
-      await updateProfile(auth.currentUser, {
-        displayName: name,
-      });
-      navigate("/");
+      // await updateProfile(auth.currentUser, {
+      //   displayName: name,
+      // });
+      
     } catch (error) {
       setAuthError(error.message);
-    } finally {
-      setUserLoading(false);
-    }
+    } 
   };
   //login user
   const loginWithEmailAndPassword = async (email, password, location,navigate) => {
@@ -71,7 +77,7 @@ const useFirebase = () => {
         setUser(user);
         axios.post('http://localhost:5000/jwt',{email:user.email})
         .then(data =>{
-          console.log(data.data);
+          
           //set acess token
           localStorage.setItem('access-token',data.data.token);
           setUserLoading(false);
@@ -88,8 +94,9 @@ const useFirebase = () => {
   return {
     user,
     userLoading,
+    updateUser,
     authError,
-    registerWithEmailAndPassword,
+    createUser,
     loginWithEmailAndPassword,
     logOutUser,
 

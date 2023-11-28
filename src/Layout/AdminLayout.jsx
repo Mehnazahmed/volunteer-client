@@ -15,7 +15,8 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import group from "../assets/logos/Group 1329.png";
 import Stack from '@mui/material/Stack';
-import {PeopleAltOutlined,AddOutlined} from "@mui/icons-material"
+import {PeopleAltOutlined,AddOutlined} from "@mui/icons-material";
+import AllUsers from "../pages/AllUsers/AllUsers";
 
 
 
@@ -68,21 +69,21 @@ const adminLayout = () => {
         
         
         <List sx={{marginTop:'70px'}}>
-          <ListItem button variant={Link}>
+          <ListItem to='/admin/users' button component={Link}>
             
               
               < PeopleAltOutlined sx={{marginRight:'1rem'}}/>
             
             <ListItemText primary="Volunteer List" />
           </ListItem>
-          <ListItem button variant={Link}>
+          <ListItem button component={Link}>
            
               <AddOutlined sx={{marginRight:'1rem'}} />
             
             
             <ListItemText primary="Add Event" />
           </ListItem>
-          {/* Add more ListItem components for additional links */}
+         
         </List>
       </Drawer>
       <Box
@@ -98,8 +99,11 @@ const adminLayout = () => {
         }}
       >
        <Box >
-        hello
-        <Outlet/>
+       
+       <Outlet>
+            <AllUsers />
+          </Outlet>
+        
        </Box>
       </Box>
     </Box>

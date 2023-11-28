@@ -14,7 +14,7 @@ const Work = () => {
     },
   });
 
-  console.log(works);
+ 
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       try {

@@ -1,17 +1,19 @@
 import { Box, Container, Typography } from "@mui/material";
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import group from "../../assets/logos/Group 1329.png";
 import { useAuth } from "../../hooks/useAuth";
 import {
-    CustomButton,
-    CustomTextField,
-    RegisterForm,
+  CustomButton,
+  CustomTextField,
+  RegisterForm,
 } from "../../styled/Register.style";
 
 const Register = () => {
-  const { registerWithEmailAndPassword } = useAuth();
+  const { createUser,updateUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -22,9 +24,34 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const handleRegister = async ({ name, email, password }) => {
-    console.log(name, email, password);
-    await registerWithEmailAndPassword(name, email, password, navigate);
+  const handleRegister = async ({ name, email, password,date,description }) => {
+    console.log(name, email, password,date,description);
+    
+    await createUser( email, password)
+    .then(result =>{
+      
+      updateUser(name)
+      .then(()=>{
+        const saveUser ={name,email,date,description}
+        axios.post('http://localhost:5000/users',saveUser)
+        .then(data=>{
+          console.log(data.data);
+          if(data.data.insertedId){
+            reset();
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'User created successfully.',
+              showConfirmButton: false,
+              timer: 1500
+          });
+          navigate('/');
+
+          }
+        })
+      })
+    })
+    
     reset();
   };
 

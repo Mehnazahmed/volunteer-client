@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./useAuth";
 
-const baseURL = "http://localhost:5000/";
+const baseURL = "http://localhost:5000";
 
 const axiosSecure = axios.create({
   baseURL,

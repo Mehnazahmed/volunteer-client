@@ -32,6 +32,10 @@ export const router = createBrowserRouter([
     element:<AdminLayout/>,
     children:[
       {
+        index: true,
+        element:<AllUsers/>
+      },
+      {
         path:'users',
         element:<AllUsers/>
       },
