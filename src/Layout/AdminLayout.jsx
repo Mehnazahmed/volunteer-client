@@ -76,7 +76,7 @@ const adminLayout = () => {
             
             <ListItemText primary="Volunteer List" />
           </ListItem>
-          <ListItem button component={Link}>
+          <ListItem to='/admin/addevent' button component={Link}>
            
               <AddOutlined sx={{marginRight:'1rem'}} />
             
