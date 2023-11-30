@@ -6,7 +6,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-import { Outlet,Link } from "react-router-dom";
+import { Outlet,Link ,useLocation} from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -20,9 +20,23 @@ import AllUsers from "../pages/AllUsers/AllUsers";
 
 
 
-const drawerWidth = 240;
+
 
 const adminLayout = () => {
+    const location = useLocation();
+
+    // Function to determine the text based on the current path
+    const getTitleText = () => {
+      const { pathname } = location;
+      switch (pathname) {
+        case "/admin/users":
+          return "Volunteer List";
+        case "/admin/addevent":
+          return "Add Event";
+        default:
+          return "Volunteer List"; // You can set a default title here
+      }
+    };
   return (
     <Box sx={{ display: "flex" }}>
      
@@ -47,7 +61,7 @@ const adminLayout = () => {
         <Toolbar>
             
       
-       <Typography fontWeight='bold' color='#111111'>Volunteer Register List</Typography>
+       <Typography fontWeight='bold' color='#111111'>{getTitleText()}</Typography>
        
         </Toolbar>
        </Stack>
