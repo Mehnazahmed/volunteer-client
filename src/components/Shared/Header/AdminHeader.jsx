@@ -10,13 +10,12 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import group from "../../../assets/logos/Group 1329.png";
-import volunteer from "../../../assets/logos/volunteering.jpeg";
 import { useAuth } from "../../../hooks/useAuth";
 import "../Header/Header.css";
-import { Button, ButtonAdmin } from "./Header.styled";
+import { Button } from "./Header.styled";
 
 
-const Header = () => {
+const AdminHeader = () => {
   const { user, logOutUser,admin } = useAuth();
   console.log(user);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -48,25 +47,14 @@ const Header = () => {
       <li>
         <Link to="/donation">Donation</Link>
       </li>
-      
+      <li>
+        <Link to="/eventsLayout">Events</Link>
+      </li>
       <li>
         <Link to="/blog">Blog</Link>
       </li>
       
-      {!user && (
-        <Link to="/signup">
-          <Button className="Btn">Register</Button>
-        </Link>
-      )}
       
-      {user && 
-        <Link  to="/admin">
-        <ButtonAdmin className="Btn">
-          Admin
-       
-      </ButtonAdmin>
-      </Link>
-      }
 
       {user && (
         <>
@@ -86,15 +74,7 @@ const Header = () => {
   return (
     <div style={{ position: "relative" }}>
       <div
-        style={{
-          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6)), url(${volunteer})`,
-          backgroundSize: "cover",
-          height: "50vh",
-
-          width: "100%",
-
-          backgroundColor: "rgba(255, 255, 255, 0.2)",
-        }}
+        
       >
         <AppBar
           sx={{
@@ -157,4 +137,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default AdminHeader;

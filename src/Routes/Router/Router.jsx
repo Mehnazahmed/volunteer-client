@@ -1,9 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import AdminLayout from "../../Layout/AdminLayout";
 import Layout from "../../Layout/Layout";
 import AddEvent from "../../pages/AddEvent/AddEvent";
 import AllUsers from "../../pages/AllUsers/AllUsers";
-import Events from "../../pages/Events/Events";
+
+
+import Events from "../../pages/Events/Events/Events";
+
+import EventsLayOut from "../../Layout/EventsLayOut";
+import AdminLayout from "../../Layout/adminLayout";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/register/Register";
@@ -24,7 +28,8 @@ export const router = createBrowserRouter([
       {
         path:'/signup',
         element:<Register/>
-      }
+      },
+      
     ],
   },
   {
@@ -43,11 +48,19 @@ export const router = createBrowserRouter([
         path:'addevent',
         element:<AddEvent/>
       },
+     
+     
+
+    ]
+  },
+  {
+    path:'eventsLayout',
+    element:<EventsLayOut/>,
+    children:[
       {
-        path:'events',
+        index:true,
         element:<Events/>
       },
-
     ]
   }
 ]);
