@@ -1,6 +1,7 @@
 import CloudUploadOutlined from "@mui/icons-material/CloudUploadOutlined";
 import { Box, Button, InputBase, Typography } from "@mui/material";
 import axios from "axios";
+import { format } from "date-fns";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -38,9 +39,11 @@ const AddEvent = () => {
       .then((imgdata) => {
         console.log(imgdata.data);
         if (imgdata.data.success) {
-          const imgUrl = imgdata.data.url;
+          const imgUrl = imgdata.data.data.url;
+          console.log(imgUrl)
           const { event, date, description } = data;
-          const newEvent ={event,date,description,image:imgUrl}
+          const formattedDate = format(new Date(date), 'dd MMM, yyyy');
+          const newEvent ={event,date: formattedDate,description,image:imgUrl}
           axiosSecure.post('/events',newEvent)
           .then(data=>{
             console.log('posting new item',data.data);
@@ -119,6 +122,7 @@ const AddEvent = () => {
             <Typography
               sx={{
                 fontWeight: "bold",
+                
                 fontSize: { xs: "1.1rem", md: "1rem" },
                 marginBottom: theme.breakpoints.down("xs") ? 1 : 0,
               }}
@@ -128,6 +132,7 @@ const AddEvent = () => {
             <InputBase
               sx={{
                 border: "1px solid #C9C9C9",
+                
                 width: "100%",
                 maxWidth: "450px",
                 [theme.breakpoints.down("xs")]: {
@@ -135,6 +140,8 @@ const AddEvent = () => {
                 },
               }}
               type="date"
+              
+             
               {...register("date", { required: true })}
             ></InputBase>
           </Box>

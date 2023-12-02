@@ -12,11 +12,10 @@ import { Link } from "react-router-dom";
 import group from "../../../assets/logos/Group 1329.png";
 import { useAuth } from "../../../hooks/useAuth";
 import "../Header/Header.css";
-import { Button } from "./Header.styled";
-
+import { Button, ButtonAdmin } from "./Header.styled";
 
 const AdminHeader = () => {
-  const { user, logOutUser,admin } = useAuth();
+  const { user, logOutUser, admin } = useAuth();
   console.log(user);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -53,29 +52,28 @@ const AdminHeader = () => {
       <li>
         <Link to="/blog">Blog</Link>
       </li>
-      
-      
 
       {user && (
         <>
+          <Link to="/admin">
+            <ButtonAdmin className="Btn">Admin</ButtonAdmin>
+          </Link>
+
           <Button onClick={handleLogOut} className="Btn">
             Logout
           </Button>
-         <li>
-         <Typography  sx={{ color: "#191919" }}>
-            {user.displayName}
-          </Typography>
-         </li>
+          <li>
+            <Typography sx={{ color: "#191919" }}>
+              {user.displayName}
+            </Typography>
+          </li>
         </>
       )}
-
     </>
   );
   return (
     <div style={{ position: "relative" }}>
-      <div
-        
-      >
+      <div>
         <AppBar
           sx={{
             position: "relative",
@@ -87,8 +85,12 @@ const AdminHeader = () => {
         >
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-             
-              <Box sx={{flexGrow: 6}}><img src={group} style={{width:'180px', marginTop:'1rem' }} /></Box>
+              <Box sx={{ flexGrow: 6 }}>
+                <img
+                  src={group}
+                  style={{ width: "180px", marginTop: "1rem" }}
+                />
+              </Box>
 
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                 <IconButton
@@ -122,13 +124,10 @@ const AdminHeader = () => {
                   {pages}
                 </Menu>
               </Box>
-             
+
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              
                 {pages}
               </Box>
-
-              
             </Toolbar>
           </Container>
         </AppBar>

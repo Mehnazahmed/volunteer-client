@@ -15,18 +15,7 @@ const Work = () => {
   });
 
  
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const res = await fetch("service.json");
-//         const jsonData = await res.json();
-//         setData(jsonData);
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       }
-//     };
-//     fetchData();
-//   }, []);
+
   return (
     <Container maxWidth="lg">
       <Box
