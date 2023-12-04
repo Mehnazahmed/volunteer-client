@@ -7,7 +7,7 @@ const Events = () => {
   const { events, refetch } = useEvents();
   console.log(events);
   return (
-    <Box sx={{ width: "100%", mx: "auto" }}>
+    <Box   sx={{ width: "100%", mx: "auto" }}>
       <Box
         sx={{
           bgcolor: "#E5E5E5",
@@ -18,7 +18,7 @@ const Events = () => {
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
           gap: 2,
-          padding: 14,
+          padding: 10,
           flexDirection: { xs: "column", md: "row" },
 
         }}

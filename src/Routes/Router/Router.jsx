@@ -10,6 +10,7 @@ import EventsLayOut from "../../Layout/EventsLayOut";
 import AdminLayout from "../../Layout/adminLayout";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
+import UserDashboard from "../../pages/UserDashboard/UserDashboard";
 import Register from "../../pages/register/Register";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
         path:'/signup',
         element:<Register/>
       },
+      
       
     ],
   },
@@ -62,6 +64,10 @@ export const router = createBrowserRouter([
       {
         index:true,
         element:<Events/>
+      },
+      {
+        path:'userDashboard',
+        element:<UserDashboard/>
       },
     ]
   }

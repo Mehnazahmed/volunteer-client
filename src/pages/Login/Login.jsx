@@ -28,7 +28,7 @@ const Login = () => {
       };
     return (
         <Box sx={{backgroundColor:'#E5E5E5',
-        padding:'120px'}}>
+        padding:'20px',height:'100%'}}>
            <Container sx={{display:'flex',flexDirection:'column',alignItems: 'center'}}>
             <img style={{width:'200px',alignItems:'center'}} src={group} alt="" srcset="" />
             <RegisterForm component='form'

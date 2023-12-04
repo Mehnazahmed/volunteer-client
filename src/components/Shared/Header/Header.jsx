@@ -49,9 +49,9 @@ const Header = () => {
       <li>
         <Link to="/">Home</Link>
       </li>
-      <li>
-        <Link to="/donation">Donation</Link>
-      </li>
+      {user &&<li>
+        <Link to="/eventsLayout/userDashboard">User</Link>
+      </li>}
       <li>
         <Link to="/eventsLayout">Events</Link>
       </li>

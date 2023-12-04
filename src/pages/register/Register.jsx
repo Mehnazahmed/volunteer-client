@@ -59,9 +59,9 @@ const Register = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#E5E5E5", padding: "120px" }}>
+    <Box sx={{ backgroundColor: "#E5E5E5", padding: "20px",width:'100%',height:'100%' }}>
       <Container
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" ,width:'100%'}}
       >
         <img
           style={{ width: "200px", alignItems: "center" }}
@@ -69,7 +69,7 @@ const Register = () => {
           alt=""
           srcset=""
         />
-        <RegisterForm component="form" onSubmit={handleSubmit(handleRegister)}>
+        <RegisterForm maxWidth='500px' sx={{width:'100%'}} component="form" onSubmit={handleSubmit(handleRegister)}>
           <Typography fontWeight={800} marginBottom="1rem">
             Register as a Volunteer
           </Typography>
