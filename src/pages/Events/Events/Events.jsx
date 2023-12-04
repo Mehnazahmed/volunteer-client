@@ -17,8 +17,8 @@ const Events = () => {
           width: "100%",
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
-          gap: 3,
-          padding: 12,
+          gap: 2,
+          padding: 14,
           flexDirection: { xs: "column", md: "row" },
 
         }}

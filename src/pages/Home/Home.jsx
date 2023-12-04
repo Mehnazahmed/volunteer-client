@@ -4,7 +4,10 @@ import Work from '../../components/Work/Work';
 
 const Home = () => {
     return (
-        <Stack>
+        <Stack maxWidth='xl'  sx={{position: 'relative', zIndex: 2, margin: -18, mx:'auto',padding: 4,
+        
+        
+        }}>
             <Work/>
         </Stack>
     );

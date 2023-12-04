@@ -8,19 +8,23 @@ import Menu from "@mui/material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import group from "../../../assets/logos/Group 1329.png";
 import volunteer from "../../../assets/logos/volunteering.jpeg";
+import useAdmin from "../../../hooks/useAdmin";
 import { useAuth } from "../../../hooks/useAuth";
 import "../Header/Header.css";
 import { Button, ButtonAdmin } from "./Header.styled";
 
 
 const Header = () => {
-  const { user, logOutUser,admin } = useAuth();
+  const { user, logOutUser} = useAuth();
   console.log(user);
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const [isAdmin] =useAdmin();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -61,7 +65,7 @@ const Header = () => {
         </Link>
       )}
       
-      {user && 
+      {user && isAdmin  &&  
         <Link  to="/admin">
         <ButtonAdmin className="Btn">
           Admin
@@ -89,9 +93,10 @@ const Header = () => {
     <div style={{ position: "relative" }}>
       <div
         style={{
-          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6)), url(${volunteer})`,
+          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(${volunteer})`,
           backgroundSize: "cover",
-          height: "50vh",
+          height: "60vh",
+          position: 'relative', zIndex: 1,
 
           width: "100%",
 

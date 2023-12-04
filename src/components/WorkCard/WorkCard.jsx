@@ -6,7 +6,7 @@ import React from "react";
 
 const WorkCard = ({ workData }) => {
   return (
-    <Card sx={{ maxWidth: "220px", width: "100%", height: "100%" }}>
+    <Card sx={{ maxWidth: "220px", width: "100%" }}>
       <CardMedia
         component="img"
         sx={{
@@ -18,7 +18,7 @@ const WorkCard = ({ workData }) => {
         alt={workData.name}
       />
       <Box
-        sx={{ backgroundColor: workData.label,  padding: "15px", width: "100%" }}
+        sx={{ backgroundColor: workData.label,  padding: "15px", width: "100%" ,height:'100%'}}
       >
         <Typography
           sx={{ textAlign: "center", width: "100%" }}

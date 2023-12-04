@@ -11,6 +11,8 @@ import AdminLayout from "../../Layout/adminLayout";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/register/Register";
+import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -34,19 +36,19 @@ export const router = createBrowserRouter([
   },
   {
     path:'admin',
-    element:<AdminLayout/>,
+    element:<AdminRoute><AdminLayout/></AdminRoute>,
     children:[
       {
         index: true,
-        element:<AllUsers/>
+        element:<AdminRoute><AllUsers/></AdminRoute>
       },
       {
         path:'users',
-        element:<AllUsers/>
+        element:<AdminRoute><AllUsers/></AdminRoute>
       },
       {
         path:'addevent',
-        element:<AddEvent/>
+        element:<AdminRoute><AddEvent/></AdminRoute>
       },
      
      
@@ -55,7 +57,7 @@ export const router = createBrowserRouter([
   },
   {
     path:'eventsLayout',
-    element:<EventsLayOut/>,
+    element:<PrivateRoute><EventsLayOut/></PrivateRoute>,
     children:[
       {
         index:true,

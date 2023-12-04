@@ -13,7 +13,7 @@ import {
 } from "../../styled/Register.style";
 
 const Register = () => {
-  const { createUser,updateUser } = useAuth();
+  const { createUser, updateUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -24,34 +24,37 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const handleRegister = async ({ name, email, password,date,description }) => {
-    console.log(name, email, password,date,description);
-    
-    await createUser( email, password)
-    .then(result =>{
-      
-      updateUser(name)
-      .then(()=>{
-        const saveUser ={name,email,date,description}
-        axios.post('http://localhost:5000/users',saveUser)
-        .then(data=>{
+  const handleRegister = async ({
+    name,
+    email,
+    password,
+    registrationDate,
+    description,
+  }) => {
+    console.log(name, email, password, description);
+
+    await createUser(email, password).then((result) => {
+      updateUser(name).then(() => {
+        const saveUser = { name, email, registrationDate, description };
+        axios.post("http://localhost:5000/users", saveUser).then((data) => {
           console.log(data.data);
-          if(data.data.insertedId){
+          if (data.data.insertedId) {
             reset();
             Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'User created successfully.',
+              position: "top-end",
+              icon: "success",
+              title: "User created successfully.",
               showConfirmButton: false,
-              timer: 1500
-          });
-          navigate('/');
+              timer: 1500,
+            });
 
+            navigate("/");
           }
-        })
-      })
-    })
-    
+          Swal.fire(data.data.message);
+        });
+      });
+    });
+
     reset();
   };
 
@@ -81,7 +84,7 @@ const Register = () => {
           <CustomTextField
             type="date"
             placeholder="Date"
-            {...register("date", { required: true })}
+            {...register("registrationDate", { required: true })}
           ></CustomTextField>
           <CustomTextField
             placeholder="Password"

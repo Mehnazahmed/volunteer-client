@@ -17,14 +17,17 @@ const Work = () => {
  
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{width:'100%'}}>
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
           justifyItems: "center",
-          gap: "5px",
-          mt: 8,
+          gap: 2,
+          width:"100%",
+          
+          
+          
         }}
       >
         {works.map((workData) => (

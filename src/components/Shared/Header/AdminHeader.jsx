@@ -10,15 +10,18 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import group from "../../../assets/logos/Group 1329.png";
+import useAdmin from "../../../hooks/useAdmin";
 import { useAuth } from "../../../hooks/useAuth";
 import "../Header/Header.css";
 import { Button, ButtonAdmin } from "./Header.styled";
 
 const AdminHeader = () => {
-  const { user, logOutUser, admin } = useAuth();
+  const { user, logOutUser} = useAuth();
+  const [isAdmin] =useAdmin();
   console.log(user);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -52,12 +55,19 @@ const AdminHeader = () => {
       <li>
         <Link to="/blog">Blog</Link>
       </li>
-
-      {user && (
+      {isAdmin && (
         <>
           <Link to="/admin">
             <ButtonAdmin className="Btn">Admin</ButtonAdmin>
           </Link>
+
+         
+        </>
+      )}
+
+      {user && (
+        <>
+          
 
           <Button onClick={handleLogOut} className="Btn">
             Logout
@@ -69,6 +79,7 @@ const AdminHeader = () => {
           </li>
         </>
       )}
+      
     </>
   );
   return (

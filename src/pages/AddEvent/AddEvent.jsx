@@ -30,6 +30,7 @@ const AddEvent = () => {
 
   const handleAddEvent = (data) => {
     console.log(data);
+    //upload image//
     const image = data.image[0];
     console.log(image);
     const formData = new FormData();
@@ -40,7 +41,8 @@ const AddEvent = () => {
         console.log(imgdata.data);
         if (imgdata.data.success) {
           const imgUrl = imgdata.data.data.url;
-          console.log(imgUrl)
+          console.log(imgUrl);
+          ////upload image//
           const { event, date, description } = data;
           const formattedDate = format(new Date(date), 'dd MMM, yyyy');
           const newEvent ={event,date: formattedDate,description,image:imgUrl}
