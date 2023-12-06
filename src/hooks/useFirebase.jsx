@@ -71,25 +71,31 @@ const useFirebase = () => {
   };
 
   //observer
-  useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-        axios.post('http://localhost:5000/jwt',{email:user.email})
-        .then(data =>{
-          
-          //set acess token
-          localStorage.setItem('access-token',data.data.token);
-          setUserLoading(false);
-        })
-      } else {
-        setUser(null);
-        localStorage.removeItem('access-token')
-      }
-      
+  useEffect(()=>{
+    const unSubscribe = onAuthStateChanged(auth,currentUser=>{
+     setUser(currentUser);
+     console.log('current-user',currentUser)
+     //get & set token using axios post
+     if(currentUser){
+       axios
+         .post("http://localhost:5000/jwt",{email:currentUser.email})
+         .then(data => {
+           console.log(data.data.token)
+           //set access token to local storage
+           localStorage.setItem('access-token',data.data.token)
+           setUserLoading(false);
+         })
+         .catch(err => console.error(err));
+     }
+     //remove token while loging out
+     else{
+       localStorage.removeItem('access-token')
+     }
+
+     
     });
-    return () => unSubscribe;
-  }, [auth]);
+    return () =>unSubscribe();
+   },[]);
 
   return {
     user,

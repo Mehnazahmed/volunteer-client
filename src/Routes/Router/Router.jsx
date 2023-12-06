@@ -8,6 +8,8 @@ import Events from "../../pages/Events/Events/Events";
 
 import EventsLayOut from "../../Layout/EventsLayOut";
 import AdminLayout from "../../Layout/adminLayout";
+
+import AddBlog from "../../pages/Blog/AddBlog/AddBlog";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import UserDashboard from "../../pages/UserDashboard/UserDashboard";
@@ -69,6 +71,11 @@ export const router = createBrowserRouter([
         path:'userDashboard',
         element:<UserDashboard/>
       },
+      {
+        path:'addBlog',
+        element:<AddBlog/>
+      },
+      
     ]
   }
 ]);

@@ -8,35 +8,34 @@ import * as React from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const JoinedEventCard = (joinedEvent) => {
-    const [axiosSecure] = useAxiosSecure();
+const JoinedEventCard = ({ joinedEvent, refetch }) => {
+  const [axiosSecure] = useAxiosSecure();
 
-    const handleDeleteEvent = (joinedEvent) => {
-        console.log(joinedEvent._id);
-        Swal.fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            axiosSecure.delete(`/joinedevents/${joinedEvent._id}`).then((res) => {
-              const data = res.data;
-              if (data.deletedCount > 0) {
-                refetch();
-                Swal.fire("Deleted Successfully");
-              }
-            });
+  const handleDeleteEvent = (joinedEvent) => {
+    console.log(joinedEvent._id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/joinedevents/${joinedEvent._id}`).then((res) => {
+          const data = res.data;
+          if (data.deletedCount > 0) {
+            refetch();
+            Swal.fire("Deleted Successfully");
           }
         });
-      };
-    
+      }
+    });
+  };
 
-    return (
-        <Card
+  return (
+    <Card
       sx={{
         display: "flex",
         maxWidth: "430px",
@@ -83,7 +82,14 @@ const JoinedEventCard = (joinedEvent) => {
           >
             {joinedEvent.date}
           </Typography>
-          
+          <Typography
+            variant="subtitle1"
+            color="#000000"
+            component="div"
+            sx={{ fontFamily: "montserrat", lineHeight: "1.2" }}
+          >
+            {joinedEvent.description}
+          </Typography>
         </CardContent>
       </Box>
       <Box
@@ -96,25 +102,20 @@ const JoinedEventCard = (joinedEvent) => {
           justifyContent: "flex-end",
         }}
       >
-       
-          <Button
-            onClick={() => handleDeleteEvent(joinedEvent)}
-            style={{
-              width: "80px",
-              backgroundColor: "#E3E3E3",
-              color: "#111111",
-              textTransform: "capitalize",
-            }}
-          >
-            Cancel
-          </Button>
-       
-           
-       
-        
+        <Button
+          onClick={() => handleDeleteEvent(joinedEvent)}
+          style={{
+            width: "80px",
+            backgroundColor: "#E3E3E3",
+            color: "#111111",
+            textTransform: "capitalize",
+          }}
+        >
+          Cancel
+        </Button>
       </Box>
     </Card>
-    );
+  );
 };
 
 export default JoinedEventCard;

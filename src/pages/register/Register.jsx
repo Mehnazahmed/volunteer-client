@@ -13,7 +13,7 @@ import {
 } from "../../styled/Register.style";
 
 const Register = () => {
-  const { createUser, updateUser } = useAuth();
+  const { createUser, updateUser ,userLoading} = useAuth();
   const {
     register,
     handleSubmit,
@@ -33,29 +33,39 @@ const Register = () => {
   }) => {
     console.log(name, email, password, description);
 
-    await createUser(email, password).then((result) => {
-      updateUser(name).then(() => {
-        const saveUser = { name, email, registrationDate, description };
-        axios.post("http://localhost:5000/users", saveUser).then((data) => {
-          console.log(data.data);
-          if (data.data.insertedId) {
-            reset();
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "User created successfully.",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-
-            navigate("/");
-          }
-          Swal.fire(data.data.message);
+    try {
+      await createUser(email, password).
+      then((result) => {
+        updateUser(name).then(() => {
+          const saveUser = { name, email, registrationDate, description };
+          axios.post("http://localhost:5000/users", saveUser).then((data) => {
+            console.log(data.data);
+            if (data.data.insertedId) {
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User created successfully.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+  
+              navigate("/");
+            }
+            Swal.fire(data.data.message);
+          });
         });
+      })
+    } catch (error) {
+      console.error("Registration failed:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Registration failed",
+        text: "An error occurred during registration. Please try again.",
       });
-    });
+    }
 
-    reset();
+    
   };
 
   return (
@@ -77,10 +87,12 @@ const Register = () => {
             placeholder="Name"
             {...register("name", { required: true })}
           ></CustomTextField>
+          {errors.name && <span className="text-red-600">Name is required</span>}
           <CustomTextField
             placeholder="Email"
             {...register("email", { required: true })}
           ></CustomTextField>
+          {errors.email && <span className="text-red-600">Email is required</span>}
           <CustomTextField
             type="date"
             placeholder="Date"
@@ -88,6 +100,7 @@ const Register = () => {
           ></CustomTextField>
           <CustomTextField
             placeholder="Password"
+            type="password"
             {...register("password", { required: true })}
           ></CustomTextField>
           <CustomTextField

@@ -1,11 +1,12 @@
 import { Box, Container, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import group from '../../assets/logos/Group 1329.png';
 import { useAuth } from '../../hooks/useAuth';
 import { CustomButton, CustomTextField, RegisterForm } from '../../styled/Register.style';
 const Login = () => {
+  const [loginError, setLoginError] = useState("");
     const {loginWithEmailAndPassword }= useAuth();
     const {
         register,
@@ -19,11 +20,16 @@ const Login = () => {
       const location =useLocation();
 
       const handleLogIn =async({email,password})=>{
-        console.log(email,password);
+        try {
+          console.log(email,password);
         await loginWithEmailAndPassword(email,password,navigate,location);
         location?.state?.from ? navigate(location.state.from.pathname)
         : navigate("/");
         reset();
+        
+        } catch (error) {
+          setLoginError(error.message)
+        }
          
       };
     return (
@@ -40,11 +46,15 @@ const Login = () => {
                placeholder='Email'
                {...register('email',{required:true})}
                ></CustomTextField>
+               {errors.email && <span>{errors.email.message}</span>}
                
                <CustomTextField 
                placeholder='Password'
                {...register('password',{required:true})}
                ></CustomTextField>
+               {errors.password && <span>{errors.password.message}</span>}
+
+               {loginError && <Typography color="error">{loginError}</Typography>}
               
                <CustomButton  type='submit'>Log in</CustomButton>
 

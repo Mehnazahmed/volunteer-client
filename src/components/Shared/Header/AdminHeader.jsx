@@ -53,7 +53,7 @@ const AdminHeader = () => {
         <Link to="/eventsLayout">Events</Link>
       </li>
       <li>
-        <Link to="/blog">Blog</Link>
+      <Link to="/eventsLayout/addBlog">Blog</Link>
       </li>
       {isAdmin && (
         <>

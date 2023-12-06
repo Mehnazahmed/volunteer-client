@@ -17,14 +17,13 @@ import { useAuth } from "../../../hooks/useAuth";
 import "../Header/Header.css";
 import { Button, ButtonAdmin } from "./Header.styled";
 
-
 const Header = () => {
-  const { user, logOutUser} = useAuth();
+  const { user, logOutUser } = useAuth();
   console.log(user);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const [isAdmin] =useAdmin();
+  const [isAdmin] = useAdmin();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -49,44 +48,42 @@ const Header = () => {
       <li>
         <Link to="/">Home</Link>
       </li>
-      {user &&<li>
-        <Link to="/eventsLayout/userDashboard">User</Link>
-      </li>}
+      {user && (
+        <li>
+          <Link to="/eventsLayout/userDashboard">User</Link>
+        </li>
+      )}
       <li>
         <Link to="/eventsLayout">Events</Link>
       </li>
-      <li>
-        <Link to="/blog">Blog</Link>
-      </li>
-      
+
       {!user && (
         <Link to="/signup">
           <Button className="Btn">Register</Button>
         </Link>
       )}
-      
-      {user && isAdmin  &&  
-        <Link  to="/admin">
-        <ButtonAdmin className="Btn">
-          Admin
-       
-      </ButtonAdmin>
-      </Link>
-      }
+
+      {user && isAdmin && (
+        <Link to="/admin">
+          <ButtonAdmin className="Btn">Admin</ButtonAdmin>
+        </Link>
+      )}
 
       {user && (
         <>
+          <li>
+            <Link to="/eventsLayout/addBlog">Blog</Link>
+          </li>
           <Button onClick={handleLogOut} className="Btn">
             Logout
           </Button>
-         <li>
-         <Typography  sx={{ color: "#191919" }}>
-            {user.displayName}
-          </Typography>
-         </li>
+          <li>
+            <Typography sx={{ color: "#191919" }}>
+              {user.displayName}
+            </Typography>
+          </li>
         </>
       )}
-
     </>
   );
   return (
@@ -96,7 +93,8 @@ const Header = () => {
           backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(${volunteer})`,
           backgroundSize: "cover",
           height: "60vh",
-          position: 'relative', zIndex: 1,
+          position: "relative",
+          zIndex: 1,
 
           width: "100%",
 
@@ -114,8 +112,12 @@ const Header = () => {
         >
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-             
-              <Box sx={{flexGrow: 6}}><img src={group} style={{width:'180px', marginTop:'1rem' }} /></Box>
+              <Box sx={{ flexGrow: 6 }}>
+                <img
+                  src={group}
+                  style={{ width: "180px", marginTop: "1rem" }}
+                />
+              </Box>
 
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                 <IconButton
@@ -149,13 +151,10 @@ const Header = () => {
                   {pages}
                 </Menu>
               </Box>
-             
+
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              
                 {pages}
               </Box>
-
-              
             </Toolbar>
           </Container>
         </AppBar>

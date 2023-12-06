@@ -1,6 +1,7 @@
 import { Stack } from '@mui/material';
 import React from 'react';
 import Work from '../../components/Work/Work';
+import Blogs from '../Blog/Blogs/Blogs';
 
 const Home = () => {
     return (
@@ -9,6 +10,8 @@ const Home = () => {
         
         }}>
             <Work/>
+            <Blogs/>
+          
         </Stack>
     );
 };
